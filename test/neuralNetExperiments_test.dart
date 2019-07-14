@@ -41,5 +41,16 @@ void main() {
 
     });
 
+    test('Supports directed connections', () {
+      tissue.add(STEM);
+      tissue.add(STEM);
+      tissue.add(STEM);
+
+      tissue.join(type: DIRECTED, from: 0, to: 2, strength: 1.0);
+
+      expect(tissue.endpoints(0), equals([2]));
+      expect(tissue.endpoints(2), equals([]));
+    });
+
   });
 }
