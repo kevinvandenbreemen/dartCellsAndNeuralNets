@@ -1,4 +1,5 @@
 import 'package:ml_linalg/linalg.dart';
+import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
 
 class Tissue {
 
@@ -46,6 +47,9 @@ class Tissue {
 
   void join({int type, int from, int to, double strength}) {
     _connectionMatrix[from][to] = strength;
+    if(type == BIDIRECTIONAL) {
+      _connectionMatrix[to][from] = strength;
+    }
   }
 
   /// Gets list of cell indexes that are endpoints for the given cell (have connections going from the cell to those cells)

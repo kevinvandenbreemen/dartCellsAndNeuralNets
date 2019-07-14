@@ -29,5 +29,17 @@ void main() {
       expect(tissue.endpoints(0), equals([1,2]));
     });
 
+    test('respects bidirectional connections', () {
+      tissue.add(STEM);
+      tissue.add(STEM);
+      tissue.add(STEM);
+
+      tissue.join(type: BIDIRECTIONAL, from: 0, to: 2, strength: 1.0);
+
+      expect(tissue.endpoints(0), equals([2]));
+      expect(tissue.endpoints(2), equals([0]));
+
+    });
+
   });
 }
