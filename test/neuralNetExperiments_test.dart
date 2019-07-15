@@ -29,6 +29,15 @@ void main() {
       expect(tissue.endpoints(0), equals([1,2]));
     });
 
+    test('cannot connect cell to itself', () {
+      tissue.add(STEM);
+      tissue.add(STEM);
+
+      tissue.join(type: BIDIRECTIONAL, from: 0, to: 0, strength: 1.0);
+
+      expect(tissue.endpoints(0), equals([]));
+    });
+
     test('respects bidirectional connections', () {
       tissue.add(STEM);
       tissue.add(STEM);

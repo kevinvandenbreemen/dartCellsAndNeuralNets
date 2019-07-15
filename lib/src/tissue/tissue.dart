@@ -46,6 +46,12 @@ class Tissue {
   }
 
   void join({int type, int from, int to, double strength}) {
+
+    if(from == to) {
+      print("Connection from cell to itself not allowed");
+      return;
+    }
+
     _connectionMatrix[from][to] = strength;
     if(type == BIDIRECTIONAL) {
       _connectionMatrix[to][from] = strength;
