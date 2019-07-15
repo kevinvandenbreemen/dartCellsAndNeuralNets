@@ -97,5 +97,27 @@ void main() {
       expect(t1.connectedTissues()[0].weight(0, 0), equals(1.1));
     });
 
+    test('Add cell to from tissue updates connection', () {
+      t1.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 1.1);
+
+      t1.add(STEM);
+
+      expect(t1.connectedTissues()[0].weight(0, 1), equals(0.0));
+    });
+
+    test('Add cell to dest tissue updates connection', (){
+      t1.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 1.1);
+
+      t2.add(STEM);
+
+      expect(t1.connectedTissues()[0].weight(1, 0), equals(0.0));
+    });
+
   });
 }

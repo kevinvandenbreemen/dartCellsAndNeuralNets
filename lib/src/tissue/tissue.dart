@@ -1,6 +1,7 @@
 import 'package:neuralNetExperiments/src/cell/CellTypes.dart';
 import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
 import 'package:neuralNetExperiments/src/tissue/Interconnection.dart';
+import 'package:neuralNetExperiments/src/tissue/TissueChangeListener.dart';
 
 class Tissue {
 
@@ -8,6 +9,8 @@ class Tissue {
   List<int> _cells;
 
   List<Interconnection> _connectedTissues;
+
+  List<TissueChangeListener> _changeListeners;
 
   /// Total number of cells in this tissue
   int get cellCount => _cells.length;
@@ -17,11 +20,22 @@ class Tissue {
   Tissue() {
     _cells = List();
     _connectedTissues = List();
+    _changeListeners = List();
   }
 
   void add(int cellType) {
     _cells.add(cellType);
     _addCellForConnectionMatrix();
+
+    _connectedTissues.forEach((connection) {
+      connection.updateOutgoingConnections();
+    });
+
+    _changeListeners.forEach((listener) => listener.onAddCell());
+  }
+
+  void listen(TissueChangeListener changeListener) {
+    _changeListeners.add(changeListener);
   }
 
   String type({int of}) {
