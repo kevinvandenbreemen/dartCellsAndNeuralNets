@@ -1,4 +1,4 @@
-import 'package:ml_linalg/linalg.dart';
+import 'package:neuralNetExperiments/src/cell/CellTypes.dart';
 import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
 
 class Tissue {
@@ -18,6 +18,10 @@ class Tissue {
   void add(int cellType) {
     _cells.add(cellType);
     _addCellForConnectionMatrix();
+  }
+
+  String type({int of}) {
+    return cellTypeName(_cells[of]);
   }
 
   void _addCellForConnectionMatrix() {

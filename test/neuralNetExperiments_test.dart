@@ -18,6 +18,12 @@ void main() {
       expect(tissue.cellCount, equals(1));
     });
 
+    test('Can show cell type', () {
+      tissue.add(STEM);
+
+      expect(tissue.type(of: 0), equals("Stem"));
+    });
+
     test('Can connect one cell to another', () {
       tissue.add(STEM);
       tissue.add(STEM);
