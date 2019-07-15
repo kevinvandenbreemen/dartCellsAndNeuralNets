@@ -34,6 +34,15 @@ class Visualizer {
     }
   }
 
+  String _color(Tissue tissue, int from, int to) {
+    double rawWeight = tissue.weight(from, to).abs();
+    if(rawWeight > 0) {
+      return "#00AA00";
+    } else {
+      return "#AA0000";
+    }
+  }
+
   String toDot(Tissue tissue) {
     final graph = Gviz();
 
@@ -48,7 +57,8 @@ class Visualizer {
         String endPoint = _nodeName(tissue, index);
         graph.addEdge(cellName, endPoint, properties: {          
           'weight': "${_weight(tissue, i, index)}",
-          'penwidth': "${_width(tissue, i, index)}"
+          'penwidth': "${_width(tissue, i, index)}",
+          'color': _color(tissue, i, index)
         });
       });
     }
