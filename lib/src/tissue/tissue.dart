@@ -1,10 +1,13 @@
 import 'package:neuralNetExperiments/src/cell/CellTypes.dart';
 import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
+import 'package:neuralNetExperiments/src/tissue/Interconnection.dart';
 
 class Tissue {
 
   /// List of cell types (each index corresponds to a single cell of that type)
   List<int> _cells;
+
+  List<Interconnection> _connectedTissues;
 
   /// Total number of cells in this tissue
   int get cellCount => _cells.length;
@@ -13,6 +16,7 @@ class Tissue {
 
   Tissue() {
     _cells = List();
+    _connectedTissues = List();
   }
 
   void add(int cellType) {
@@ -62,12 +66,14 @@ class Tissue {
     }
   }
 
-  void connectToTissue(Tissue tissue, {int from, int to}) {
-
+  void connectToTissue(Tissue tissue, {int from, int to, double strength}) {
+    Interconnection connection = Interconnection(this, tissue);
+    connection.connect(from, to, strength);
+    _connectedTissues.add(connection);
   }
 
-  List connectedTissues() {
-    
+  List<Interconnection> connectedTissues() {
+    return List.unmodifiable(_connectedTissues);
   }
 
   /// Gets list of cell indexes that are endpoints for the given cell (have connections going from the cell to those cells)
