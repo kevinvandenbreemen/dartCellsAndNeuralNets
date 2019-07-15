@@ -119,5 +119,18 @@ void main() {
       expect(t1.connectedTissues()[0].weight(1, 0), equals(0.0));
     });
 
+    test('Add multiple connection weights', (){
+      t1.add(STEM);
+      t2.add(STEM);
+      t1.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 1.1);
+      t1.connectToTissue(t2, from: 1, to: 0, strength: 2.0);
+
+      expect(t1.connectedTissues()[0].weight(0, 0), equals(1.1));
+      expect(t1.connectedTissues()[0].weight(0, 1), equals(2.0));
+    });
+
   });
 }

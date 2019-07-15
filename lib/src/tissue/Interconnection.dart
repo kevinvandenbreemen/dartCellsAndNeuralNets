@@ -8,6 +8,8 @@ class Interconnection implements TissueChangeListener {
   Tissue _from;
   Tissue _to;
 
+  Tissue get to => _to;
+
   List<List<double>> _tissueConnections;
 
   Interconnection(this._from, this._to) {
@@ -19,12 +21,12 @@ class Interconnection implements TissueChangeListener {
     this._to.listen(this);
   }
 
-  double weight(int from, int to) {
-    return _tissueConnections[from][to];
+  double weight(int to, int from) {
+    return _tissueConnections[to][from];
   }
 
   void connect(int from, int to, double strength) {
-    _tissueConnections[from][to] = strength;
+    _tissueConnections[to][from] = strength;
   }
 
   void updateOutgoingConnections() {

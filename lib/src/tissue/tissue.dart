@@ -81,9 +81,16 @@ class Tissue {
   }
 
   void connectToTissue(Tissue tissue, {int from, int to, double strength}) {
-    Interconnection connection = Interconnection(this, tissue);
+
+    Interconnection connection = _connectedTissues.isNotEmpty ? _connectedTissues.firstWhere((connection) => connection.to == tissue) : null;
+
+    if(connection == null) {
+      connection = Interconnection(this, tissue);
+      _connectedTissues.add(connection);
+    }
+
     connection.connect(from, to, strength);
-    _connectedTissues.add(connection);
+    
   }
 
   List<Interconnection> connectedTissues() {
