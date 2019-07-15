@@ -1,14 +1,15 @@
 name: neuralNetExperiments
-description: A starting point for Dart libraries or applications.
-# version: 1.0.0
-# homepage: https://www.example.com
-# author: Kevin VanDenBreemen <kevin.vandenbreemen@gmail.com>
+description: Dart library project to learn about writing dart programs other than websites or apps
+version: 0.0.2
+homepage: https://github.com/kevinvandenbreemen/dartCellsAndNeuralNets
+author: Kevin VanDenBreemen <kevin.vandenbreemen@gmail.com>
 
 environment:
   sdk: '>=2.4.0 <3.0.0'
 
 dependencies:
   ml_linalg: ^10.3.7
+  gviz: ^0.3.0
 
 dev_dependencies:
   pedantic: ^1.7.0
