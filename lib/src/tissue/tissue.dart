@@ -82,6 +82,11 @@ class Tissue {
 
   void connectToTissue(Tissue tissue, {int from, int to, double strength}) {
 
+    if(tissue == this){
+      print('Tissue connecting to itself is not allowed');
+      return;
+    }
+
     Interconnection connection = _connectedTissues.isNotEmpty ? _connectedTissues.firstWhere((connection) => connection.to == tissue) : null;
 
     if(connection == null) {

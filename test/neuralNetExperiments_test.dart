@@ -132,5 +132,14 @@ void main() {
       expect(t1.connectedTissues()[0].weight(0, 1), equals(2.0));
     });
 
+    test('Tissue cannot connect to itself', () {
+      t1.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t1, from: 0, to: 0, strength: 1.1);
+
+      expect(t1.connectedTissues().isEmpty, isTrue);
+    });
+
   });
 }
