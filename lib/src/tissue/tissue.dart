@@ -62,6 +62,14 @@ class Tissue {
     }
   }
 
+  void connectToTissue(Tissue tissue, {int from, int to}) {
+
+  }
+
+  List connectedTissues() {
+    
+  }
+
   /// Gets list of cell indexes that are endpoints for the given cell (have connections going from the cell to those cells)
   List<int> endpoints(int cellIndex) {
 

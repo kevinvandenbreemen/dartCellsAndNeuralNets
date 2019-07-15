@@ -68,4 +68,25 @@ void main() {
     });
 
   });
+
+  group('Connecting with Other Tissues', () {
+
+    Tissue t1;
+    Tissue t2;
+
+    setUp((){
+      t1 = Tissue();
+      t2 = Tissue();
+    });
+
+    test('Connect cell in one tissue with cell in another', (){
+      t1.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0);
+
+      expect(t1.connectedTissues().length, equals(1));
+    });
+
+  });
 }
