@@ -74,4 +74,9 @@ class Tissue {
     return ret;
   }
 
+  /// Gets the weight of the connection (0 if none exists) from the given [cellIndex] to the given [toIndex]
+  double weight(int cellIndex, int toIndex) {
+    return _connectionMatrix[cellIndex][toIndex];
+  }
+
 }
