@@ -1,8 +1,10 @@
 
+import 'package:neuralNetExperiments/src/reality/reality.dart';
 import 'package:neuralNetExperiments/src/tissue/TissueChangeListener.dart';
 import 'package:neuralNetExperiments/src/tissue/tissue.dart';
 
-/// Connection from one tissue to another.  Represents an
+/// Connection from one tissue to another.  Represents a connection matrix whose entries correspond to strengths of connections from
+/// cells in one tissue to those in the other tissue
 class Interconnection implements TissueChangeListener {
 
   Tissue _from;
@@ -19,6 +21,7 @@ class Interconnection implements TissueChangeListener {
     );
 
     this._to.listen(this);
+    Reality.get().registerConnectionMatrix(this);
   }
 
   double weight(int to, int from) {

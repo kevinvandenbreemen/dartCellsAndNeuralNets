@@ -1,4 +1,5 @@
 import 'package:neuralNetExperiments/src/cell/CellTypes.dart';
+import 'package:neuralNetExperiments/src/reality/reality.dart';
 import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
 import 'package:neuralNetExperiments/src/tissue/Interconnection.dart';
 import 'package:neuralNetExperiments/src/tissue/TissueChangeListener.dart';
@@ -21,6 +22,7 @@ class Tissue {
     _cells = List();
     _connectedTissues = List();
     _changeListeners = List();
+    Reality.get().registerTissue(this);
   }
 
   void add(int cellType) {

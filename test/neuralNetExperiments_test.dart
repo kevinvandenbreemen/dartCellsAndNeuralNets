@@ -1,7 +1,10 @@
 import 'package:neuralNetExperiments/src/cell/CellTypes.dart';
+import 'package:neuralNetExperiments/src/reality/reality.dart';
 import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
+import 'package:neuralNetExperiments/src/tissue/Interconnection.dart';
 import 'package:neuralNetExperiments/src/tissue/tissue.dart';
 import 'package:test/test.dart';
+import 'package:test/test.dart' as prefix0;
 
 void main() {
   group('Tissue', () {
@@ -10,6 +13,11 @@ void main() {
 
     setUp((){
       tissue = Tissue();
+    });
+
+    test('Gets added to reality', (){
+      Reality reality = Reality.get();
+      expect(reality.setOfAllTissues.contains(tissue), isTrue);
     });
 
     test('Adds stem cell', () {
@@ -86,6 +94,16 @@ void main() {
       t1.connectToTissue(t2, from: 0, to: 0);
 
       expect(t1.connectedTissues().length, equals(1));
+    });
+
+    test('Any connection is added to reality', (){
+      t1.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0);
+
+      Interconnection connection = t1.connectedTissues()[0];
+      expect(Reality.get().setOfAllConnectionMatrices.contains(connection), isTrue);
     });
 
     test('Connect cell in one tissue with cell in another', (){
