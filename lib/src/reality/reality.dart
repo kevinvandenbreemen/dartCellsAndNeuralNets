@@ -17,7 +17,7 @@ class Reality {
   List<Interconnection> _setOfAllConnectionMatrices;
   List<Interconnection> get setOfAllConnectionMatrices => List.unmodifiable(_setOfAllConnectionMatrices);
   void registerConnectionMatrix(Interconnection connectionMatrix) {
-    this._setOfAllConnectionMatrices.add(connectionMatrix);
+    _setOfAllConnectionMatrices.add(connectionMatrix);
   }
 
   Reality._Reality(){
