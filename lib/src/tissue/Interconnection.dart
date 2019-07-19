@@ -11,6 +11,7 @@ class Interconnection implements TissueChangeListener {
   Tissue _to;
 
   Tissue get to => _to;
+  Tissue get from => _from;
 
   List<List<double>> _tissueConnections;
 

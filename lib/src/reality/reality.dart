@@ -3,6 +3,25 @@ import 'package:neuralNetExperiments/src/tissue/tissue.dart';
 
 /// Overarching reality of the internals of the system
 
+abstract class Chi {
+  List<Interconnection> get tIn;
+  List<Interconnection> get tOut;
+}
+
+class _Chi implements Chi {
+
+  List<Interconnection> _connectionMatrices;
+  Tissue _t;
+  _Chi(this._connectionMatrices, this._t);
+
+  @override
+  List<Interconnection> get tIn => _connectionMatrices.where((x) => x.to == _t).toList(growable: false);
+
+  @override
+  List<Interconnection> get tOut => _connectionMatrices.where((x) => x.from == _t).toList(growable: false);
+
+}
+
 class Reality {
 
   static final Reality _reality = Reality._Reality();
@@ -18,6 +37,12 @@ class Reality {
   List<Interconnection> get setOfAllConnectionMatrices => List.unmodifiable(_setOfAllConnectionMatrices);
   void registerConnectionMatrix(Interconnection connectionMatrix) {
     _setOfAllConnectionMatrices.add(connectionMatrix);
+  }
+
+  Chi X(Tissue t) {
+    return _Chi(_setOfAllConnectionMatrices.where((x) => x.from == t || x.to == t).toList(growable: false),
+      t
+    );
   }
 
   Reality._Reality(){
