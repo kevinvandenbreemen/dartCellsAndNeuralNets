@@ -32,6 +32,15 @@ void main() {
       expect(tissue.type(of: 0), equals("Stem"));
     });
 
+    test('Can list types of cells in tissue', (){
+      tissue.add(STEM);
+      tissue.add(2);
+
+      List<int> cellTypes = tissue.cellTypes;
+
+      expect(cellTypes, equals([1,2]));
+    });
+
     test('Can connect one cell to another', () {
       tissue.add(STEM);
       tissue.add(STEM);

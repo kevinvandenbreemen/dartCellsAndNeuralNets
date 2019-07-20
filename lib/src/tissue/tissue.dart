@@ -8,6 +8,7 @@ class Tissue {
 
   /// List of cell types (each index corresponds to a single cell of that type)
   List<int> _cells;
+  List<int> get cellTypes => List<int>.from(_cells, growable: false);
 
   List<Interconnection> _connectedTissues;
 
