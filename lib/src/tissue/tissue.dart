@@ -125,7 +125,14 @@ class Tissue {
   /// Returns set of all outgoing tissue connections such that the cell at index [cellIndex] has a 
   /// non-zero connection to at least one cell
   List<Interconnection> cVOut(int cellIndex) {
-    return _connectedTissues.where((c) => c.existConnectionsFrom(0)).toList(growable: false);
+    return _connectedTissues.where((c) => c.existConnectionsFrom(cellIndex)).toList(growable: false);
+  }
+
+  /// Returns set of all incoming tissue connections such that the cell at index[cellIndex] has a
+  /// non-zero connection from at least one cell
+  List<Interconnection> cVIn(int cellIndex) {
+    List<Interconnection> incomingConnections = Reality.get().X(this).tIn;
+    return incomingConnections.where((c) => c.existConnectionsTo(cellIndex)).toList(growable: false);
   }
 
   /// Gets the weight of the connection (0 if none exists) from the given [cellIndex] to the given [toIndex]

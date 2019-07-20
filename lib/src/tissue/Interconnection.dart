@@ -52,4 +52,8 @@ class Interconnection implements TissueChangeListener {
     return ret;
   }
 
+  bool existConnectionsTo(int toIndex) {
+    return _tissueConnections[toIndex].firstWhere((input)=>input != 0, orElse: ()=>null) != null ? true : false;
+  }
+
 }
