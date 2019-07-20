@@ -224,5 +224,29 @@ void main() {
 
     });
 
+    test('Can calculate output to other tissue', (){
+
+      //  Arrange
+      t1.add(STEM);
+      t1.add(STEM);
+      t2.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 0.5);
+      t1.connectToTissue(t2, from: 0, to: 1, strength: 0.1);
+      t1.connectToTissue(t2, from: 1, to: 0, strength: 0.4);
+      t1.connectToTissue(t2, from: 1, to: 1, strength: 1.0);
+
+      List<double> input = List<double>.from([2.0, 4.0]);
+      Interconnection connection = t1.connectedTissues()[0];
+
+      //  Act
+      List<double> output = connection.computeOutputFor(input);
+
+      //  Assert
+      expect(output, equals([2.6, 4.2]));
+
+    });
+
   });
 }

@@ -1,4 +1,6 @@
 
+import 'package:linalg/matrix.dart';
+import 'package:linalg/vector.dart';
 import 'package:neuralNetExperiments/src/reality/reality.dart';
 import 'package:neuralNetExperiments/src/tissue/TissueChangeListener.dart';
 import 'package:neuralNetExperiments/src/tissue/tissue.dart';
@@ -16,8 +18,14 @@ class Interconnection implements TissueChangeListener {
   List<List<double>> _tissueConnections;
 
   Interconnection(this._from, this._to) {
-    this._tissueConnections = List<List<double>>.filled(_to.cellCount, 
-      List<double>.filled(_from.cellCount, 0.0, growable: true),
+    this._tissueConnections = new List<List<double>>.generate(_to.cellCount, 
+      (_) { 
+        List<double> ret = new List<double>()..length = _from.cellCount;
+        for(var i=0; i<ret.length; i++) {
+          ret[i] = 0.0;
+        }
+        return ret;
+      },
       growable: true
     );
 
@@ -54,6 +62,11 @@ class Interconnection implements TissueChangeListener {
 
   bool existConnectionsTo(int toIndex) {
     return _tissueConnections[toIndex].firstWhere((input)=>input != 0, orElse: ()=>null) != null ? true : false;
+  }
+
+  List<double> computeOutputFor(List<double> input){
+    Matrix weightMatrix = Matrix(_tissueConnections);
+    return (weightMatrix * Vector.column(input)).columnVector(0).toList();
   }
 
 }
