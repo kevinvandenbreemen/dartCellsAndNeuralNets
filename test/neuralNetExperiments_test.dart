@@ -187,6 +187,7 @@ void main() {
       t1.connectToTissue(t3, from: 0, to: 0, strength: 1.1);
       t1.connectToTissue(t2, from: 0, to: 0, strength: 2.0);
       t1.connectToTissue(t4, from: 1, to: 0, strength: 1.1);
+      t2.connectToTissue(t1, from: 0, to: 0, strength: 1);
       List<Interconnection> cVOut = t1.cVOut(0);
 
       expect(cVOut.isEmpty, isFalse);
