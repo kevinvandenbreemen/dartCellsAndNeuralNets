@@ -90,7 +90,12 @@ class Tissue {
       return;
     }
 
-    Interconnection connection = _connectedTissues.isNotEmpty ? _connectedTissues.firstWhere((connection) => connection.to == tissue) : null;
+    Interconnection connection;
+    if (_connectedTissues.isNotEmpty) {
+      connection = _connectedTissues.firstWhere((connection) => connection.to == tissue, orElse: ()=>null);
+    } else {
+      connection = null;
+    }
 
     if(connection == null) {
       connection = Interconnection(this, tissue);

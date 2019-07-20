@@ -168,5 +168,33 @@ void main() {
       expect(t1.connectedTissues().isEmpty, isTrue);
     });
 
+    test('Can count connections to other tissues for a given cell', (){
+
+      //  Arrange
+      Tissue t3 = Tissue();
+      t3.add(STEM);
+      t3.add(STEM);
+
+      Tissue t4 = Tissue();
+      t4.add(STEM);
+      t4.add(STEM);
+
+      t1.add(STEM);
+      t2.add(STEM);
+      t1.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t3, from: 0, to: 0, strength: 1.1);
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 2.0);
+      t1.connectToTissue(t4, from: 1, to: 0, strength: 1.1);
+
+      List<Interconnection> outboundConnections = Reality.get().X(t1).tOut;
+      List<Interconnection> cVOut = outboundConnections.where((c) => c.existConnectionsFrom(0)).toList(growable: false);
+
+      expect(cVOut.isEmpty, isFalse);
+      expect(cVOut.length, equals(2));
+
+    });
+
   });
 }

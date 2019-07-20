@@ -42,4 +42,14 @@ class Interconnection implements TissueChangeListener {
     _tissueConnections.add(List<double>.filled(_from.cellCount, 0.0));
   }
 
+  bool existConnectionsFrom(int fromIndex) {
+    bool ret = false;
+    _tissueConnections.forEach((destinationCellInputs) {
+      if(destinationCellInputs[fromIndex] != 0) {
+        ret = true;
+      }
+    });
+    return ret;
+  }
+
 }
