@@ -47,7 +47,11 @@ class Interconnection implements TissueChangeListener {
 
   @override
   void onAddCell() {
-    _tissueConnections.add(List<double>.filled(_from.cellCount, 0.0));
+    List<double> destinationRow = new List<double>()..length = _from.cellCount;
+    for(var i=0; i<destinationRow.length; i++) {
+      destinationRow[i] = 0.0;
+    }
+    _tissueConnections.add(destinationRow);
   }
 
   bool existConnectionsFrom(int fromIndex) {
