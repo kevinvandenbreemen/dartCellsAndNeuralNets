@@ -4,7 +4,6 @@ import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
 import 'package:neuralNetExperiments/src/tissue/Interconnection.dart';
 import 'package:neuralNetExperiments/src/tissue/tissue.dart';
 import 'package:test/test.dart';
-import 'package:test/test.dart' as prefix0;
 
 void main() {
   group('Tissue', () {
