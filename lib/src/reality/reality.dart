@@ -9,21 +9,20 @@ abstract class Chi {
 }
 
 class _Chi implements Chi {
-
   List<Interconnection> _connectionMatrices;
   Tissue _t;
   _Chi(this._connectionMatrices, this._t);
 
   @override
-  List<Interconnection> get tIn => _connectionMatrices.where((x) => x.to == _t).toList(growable: false);
+  List<Interconnection> get tIn =>
+      _connectionMatrices.where((x) => x.to == _t).toList(growable: false);
 
   @override
-  List<Interconnection> get tOut => _connectionMatrices.where((x) => x.from == _t).toList(growable: false);
-
+  List<Interconnection> get tOut =>
+      _connectionMatrices.where((x) => x.from == _t).toList(growable: false);
 }
 
 class Reality {
-
   static final Reality _reality = Reality._Reality();
   static Reality get() => _reality;
 
@@ -34,20 +33,22 @@ class Reality {
   }
 
   List<Interconnection> _setOfAllConnectionMatrices;
-  List<Interconnection> get setOfAllConnectionMatrices => List.unmodifiable(_setOfAllConnectionMatrices);
+  List<Interconnection> get setOfAllConnectionMatrices =>
+      List.unmodifiable(_setOfAllConnectionMatrices);
   void registerConnectionMatrix(Interconnection connectionMatrix) {
     _setOfAllConnectionMatrices.add(connectionMatrix);
   }
 
   Chi X(Tissue t) {
-    return _Chi(_setOfAllConnectionMatrices.where((x) => x.from == t || x.to == t).toList(growable: false),
-      t
-    );
+    return _Chi(
+        _setOfAllConnectionMatrices
+            .where((x) => x.from == t || x.to == t)
+            .toList(growable: false),
+        t);
   }
 
-  Reality._Reality(){
+  Reality._Reality() {
     _setOfAllTissues = List<Tissue>();
     _setOfAllConnectionMatrices = List<Interconnection>();
   }
-
 }
