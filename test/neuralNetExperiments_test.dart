@@ -1,3 +1,5 @@
+import 'package:linalg/matrix.dart';
+import 'package:linalg/vector.dart';
 import 'package:neuralNetExperiments/src/cell/CellTypes.dart';
 import 'package:neuralNetExperiments/src/reality/reality.dart';
 import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
@@ -246,6 +248,45 @@ void main() {
       //  Assert
       expect(output, equals([2.6, 4.2]));
 
+    });
+
+    test('Output to other tissue works after adding cell to destination tissue', (){
+      //  Arrange
+      t1.add(STEM);
+      t1.add(STEM);
+      t2.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 0.5);
+      t1.connectToTissue(t2, from: 0, to: 1, strength: 0.1);
+      t1.connectToTissue(t2, from: 1, to: 0, strength: 0.4);
+      t1.connectToTissue(t2, from: 1, to: 1, strength: 1.0);
+
+      t2.add(STEM);
+
+      //  Matrix here is
+      /*
+      [0.5  0.4]
+      [0.1  1.0]
+      */
+      Matrix expectedWeightMatrix = Matrix(
+        [
+          [0.5, 0.4],
+          [0.1, 1.0],
+          [0.0, 0.0]
+        ]
+      );
+
+      List<double> input = List<double>.from([2.0, 4.0]);
+      List<double> expectedOutputs = (expectedWeightMatrix * Vector.column(input)).columnVector(0).toList();
+
+      Interconnection connection = t1.connectedTissues()[0];
+
+      //  Act
+      List<double> output = connection.computeOutputFor(input);
+
+      //  Assert
+      expect(output, equals(expectedOutputs));
     });
 
   });
