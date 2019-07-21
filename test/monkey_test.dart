@@ -8,7 +8,7 @@ import 'package:test/test.dart';
 
 main() {
   
-  const int iterations = 500;
+  const int iterations = 100;
   Random random = Random();
   List<List<double>> rawWeightMatrix;
   void addOutgoingCellOnMatrix(Tissue originTissue) {
@@ -72,7 +72,7 @@ main() {
         t1.connectToTissue(t2, from: from, to: to, strength: strength);
         addConnection(from, to, strength);
 
-        List<double> values = List<double>.generate(t1.cellCount, (k)=>0.5);
+        List<double> values = List<double>.generate(t1.cellCount, (k)=>random.nextDouble());
         List<double> expectedOutput = (Matrix(rawWeightMatrix) * Vector.column(values)).columnVector(0).toList();
         List<double> resultOfInputs = t1.connectedTissues()[0].computeOutputFor(values);
 
@@ -114,13 +114,13 @@ main() {
         t1.connectToTissue(t2, from: from, to: to, strength: strength);
         addConnection(from, to, strength);
 
-        List<double> values = List<double>.generate(t1.cellCount, (k)=>0.5);
+        List<double> values = List<double>.generate(t1.cellCount, (k)=>random.nextDouble());
         try {
           
-          //List<double> expectedOutput = (Matrix(rawWeightMatrix) * Vector.column(values)).columnVector(0).toList();
+          List<double> expectedOutput = (Matrix(rawWeightMatrix) * Vector.column(values)).columnVector(0).toList();
           List<double> resultOfInputs = t1.connectedTissues()[0].computeOutputFor(values);
 
-          //expect(expectedOutput, resultOfInputs, reason: "Weight matrix: $rawWeightMatrix, Inputs: $values");
+          expect(expectedOutput, resultOfInputs, reason: "Weight matrix: $rawWeightMatrix, Inputs: $values");
         } catch(ex){
           fail("Unexpected ${ex.toString()}:  Raw matrix = $rawWeightMatrix, input:  $values");
         }
