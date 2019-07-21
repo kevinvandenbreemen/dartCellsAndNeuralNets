@@ -34,6 +34,9 @@ class Interconnection implements TissueChangeListener {
   }
 
   double weight(int to, int from) {
+    if(to >= _tissueConnections.length) {
+      throw InvalidCellReferenceException(to);
+    }
     return _tissueConnections[to][from];
   }
 
@@ -54,6 +57,11 @@ class Interconnection implements TissueChangeListener {
     _tissueConnections.add(destinationRow);
   }
 
+  @override
+  void deleteCell(int cellIndex) {
+    _tissueConnections.removeAt(cellIndex);
+  }
+
   bool existConnectionsFrom(int fromIndex) {
     bool ret = false;
     _tissueConnections.forEach((destinationCellInputs) {
@@ -62,6 +70,12 @@ class Interconnection implements TissueChangeListener {
       }
     });
     return ret;
+  }
+
+  void removeConnectionsFrom(int cellIndex) {
+    _tissueConnections.forEach((outputRow) {
+      outputRow.removeAt(cellIndex);
+    });
   }
 
   bool existConnectionsTo(int toIndex) {

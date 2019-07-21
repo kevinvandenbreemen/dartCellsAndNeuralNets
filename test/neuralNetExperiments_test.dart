@@ -27,6 +27,14 @@ void main() {
       expect(tissue.cellCount, equals(1));
     });
 
+    test('Deletes cell', (){
+      tissue.add(STEM);
+      tissue.add(STEM);
+      tissue.deleteCell(1);
+
+      expect(tissue.cellCount, equals(1));
+    });
+
     test('Can show cell type', () {
       tissue.add(STEM);
 
@@ -147,6 +155,18 @@ void main() {
       expect(t1.connectedTissues()[0].weight(1, 0), equals(0.0));
     });
 
+    test('Deleting cell in destination tissue deletes corresponding outgoing connections', (){
+      t1.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 1.1);
+
+      t2.add(STEM);
+      t2.deleteCell(1);
+
+      expect(()=>t1.connectedTissues()[0].weight(1, 0), throwsException);
+    });
+
     test('Add multiple connection weights', (){
       t1.add(STEM);
       t2.add(STEM);
@@ -248,6 +268,56 @@ void main() {
       //  Assert
       expect(output, equals([2.6, 4.2]));
 
+    });
+
+    test('Deleting cells does not break output function', (){
+      //  Arrange
+      t1.add(STEM);
+      t1.add(STEM);
+      t2.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 0.5);
+      t1.connectToTissue(t2, from: 0, to: 1, strength: 0.1);
+      t1.connectToTissue(t2, from: 1, to: 0, strength: 0.4);
+      t1.connectToTissue(t2, from: 1, to: 1, strength: 1.0);
+
+      t1.add(STEM);
+      t1.deleteCell(2);
+
+      List<double> input = List<double>.from([2.0, 4.0]);
+      Interconnection connection = t1.connectedTissues()[0];
+
+      //  Act
+      List<double> output = connection.computeOutputFor(input);
+
+      //  Assert
+      expect(output, equals([2.6, 4.2]));
+    });
+
+    test('Deleting cell on destination tissue does not break output function', (){
+      //  Arrange
+      t1.add(STEM);
+      t1.add(STEM);
+      t2.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 0.5);
+      t1.connectToTissue(t2, from: 0, to: 1, strength: 0.1);
+      t1.connectToTissue(t2, from: 1, to: 0, strength: 0.4);
+      t1.connectToTissue(t2, from: 1, to: 1, strength: 1.0);
+
+      t2.add(STEM);
+      t2.deleteCell(2);
+
+      List<double> input = List<double>.from([2.0, 4.0]);
+      Interconnection connection = t1.connectedTissues()[0];
+
+      //  Act
+      List<double> output = connection.computeOutputFor(input);
+
+      //  Assert
+      expect(output, equals([2.6, 4.2]));
     });
 
     test('Output to other tissue works after adding cell to destination tissue', (){

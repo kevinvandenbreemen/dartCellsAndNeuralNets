@@ -4,6 +4,17 @@ import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
 import 'package:neuralNetExperiments/src/tissue/Interconnection.dart';
 import 'package:neuralNetExperiments/src/tissue/TissueChangeListener.dart';
 
+class InvalidCellReferenceException implements Exception {
+  int _cellIndex;
+
+  InvalidCellReferenceException(this._cellIndex): super();
+
+  @override
+  String toString() {
+    return "Cell at $_cellIndex does not exist";
+  }
+}
+
 class Tissue {
 
   /// List of cell types (each index corresponds to a single cell of that type)
@@ -35,6 +46,12 @@ class Tissue {
     });
 
     _changeListeners.forEach((listener) => listener.onAddCell());
+  }
+
+  void deleteCell(int cellIndex) {
+    _cells.removeAt(cellIndex);
+    _connectedTissues.forEach((tissueConnection) => tissueConnection.removeConnectionsFrom(cellIndex));
+    _changeListeners.forEach((listener) => listener.deleteCell(cellIndex));
   }
 
   void listen(TissueChangeListener changeListener) {
