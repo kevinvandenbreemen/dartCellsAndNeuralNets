@@ -1,5 +1,5 @@
-name: neuralNetExperiments
-description: Dart library project to learn about writing dart programs other than websites or apps
+name: neural_net_experiments
+description: Simple dart library to learn about creating neural nets with dart code
 version: 0.0.2
 homepage: https://github.com/kevinvandenbreemen/dartCellsAndNeuralNets
 author: Kevin VanDenBreemen <kevin.vandenbreemen@gmail.com>

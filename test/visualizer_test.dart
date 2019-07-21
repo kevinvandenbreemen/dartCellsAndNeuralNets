@@ -1,7 +1,7 @@
-import 'package:neuralNetExperiments/src/cell/CellTypes.dart';
-import 'package:neuralNetExperiments/src/debug/Visualizer.dart';
-import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
-import 'package:neuralNetExperiments/src/tissue/tissue.dart';
+import 'package:neural_net_experiments/src/cell/CellTypes.dart';
+import 'package:neural_net_experiments/src/debug/Visualizer.dart';
+import 'package:neural_net_experiments/src/tissue/ConnectionTypes.dart';
+import 'package:neural_net_experiments/src/tissue/tissue.dart';
 import 'package:test/test.dart';
 
 main() {

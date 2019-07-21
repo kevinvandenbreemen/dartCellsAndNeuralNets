@@ -1,5 +1,5 @@
-import 'package:neuralNetExperiments/src/tissue/Interconnection.dart';
-import 'package:neuralNetExperiments/src/tissue/tissue.dart';
+import 'package:neural_net_experiments/src/tissue/Interconnection.dart';
+import 'package:neural_net_experiments/src/tissue/tissue.dart';
 
 /// Overarching reality of the internals of the system
 

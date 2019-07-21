@@ -1,10 +1,10 @@
 import 'package:linalg/matrix.dart';
 import 'package:linalg/vector.dart';
-import 'package:neuralNetExperiments/src/cell/CellTypes.dart';
-import 'package:neuralNetExperiments/src/reality/reality.dart';
-import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
-import 'package:neuralNetExperiments/src/tissue/Interconnection.dart';
-import 'package:neuralNetExperiments/src/tissue/tissue.dart';
+import 'package:neural_net_experiments/src/cell/CellTypes.dart';
+import 'package:neural_net_experiments/src/reality/reality.dart';
+import 'package:neural_net_experiments/src/tissue/ConnectionTypes.dart';
+import 'package:neural_net_experiments/src/tissue/Interconnection.dart';
+import 'package:neural_net_experiments/src/tissue/tissue.dart';
 import 'package:test/test.dart';
 
 void main() {

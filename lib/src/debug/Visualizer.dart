@@ -1,5 +1,5 @@
 import 'package:gviz/gviz.dart';
-import 'package:neuralNetExperiments/src/tissue/tissue.dart';
+import 'package:neural_net_experiments/src/tissue/tissue.dart';
 
 
 class Visualizer {

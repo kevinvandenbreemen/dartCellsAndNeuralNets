@@ -1,9 +1,9 @@
 
 import 'package:linalg/matrix.dart';
 import 'package:linalg/vector.dart';
-import 'package:neuralNetExperiments/src/reality/reality.dart';
-import 'package:neuralNetExperiments/src/tissue/TissueChangeListener.dart';
-import 'package:neuralNetExperiments/src/tissue/tissue.dart';
+import 'package:neural_net_experiments/src/reality/reality.dart';
+import 'package:neural_net_experiments/src/tissue/TissueChangeListener.dart';
+import 'package:neural_net_experiments/src/tissue/tissue.dart';
 
 /// Connection from one tissue to another.  Represents a connection matrix whose entries correspond to strengths of connections from
 /// cells in one tissue to those in the other tissue

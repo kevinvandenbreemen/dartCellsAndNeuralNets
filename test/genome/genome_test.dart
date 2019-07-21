@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:neuralNetExperiments/src/genome/GenomeFactory.dart';
+import 'package:neural_net_experiments/src/genome/GenomeFactory.dart';
 import 'package:test/test.dart';
 
 main() {

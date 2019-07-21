@@ -1,4 +1,4 @@
-import 'package:neuralNetExperiments/src/reality/context.dart';
+import 'package:neural_net_experiments/src/reality/context.dart';
 
 /// Facts about tissues.  These must all return results of type boolean
 class TissueCellCountLessThan {

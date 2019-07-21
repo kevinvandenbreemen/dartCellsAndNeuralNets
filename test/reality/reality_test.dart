@@ -1,6 +1,6 @@
-import 'package:neuralNetExperiments/src/cell/CellTypes.dart';
-import 'package:neuralNetExperiments/src/reality/reality.dart';
-import 'package:neuralNetExperiments/src/tissue/tissue.dart';
+import 'package:neural_net_experiments/src/cell/CellTypes.dart';
+import 'package:neural_net_experiments/src/reality/reality.dart';
+import 'package:neural_net_experiments/src/tissue/tissue.dart';
 import 'package:test/test.dart';
 
 main() {

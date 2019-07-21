@@ -1,8 +1,8 @@
-import 'package:neuralNetExperiments/src/cell/CellTypes.dart';
-import 'package:neuralNetExperiments/src/reality/reality.dart';
-import 'package:neuralNetExperiments/src/tissue/ConnectionTypes.dart';
-import 'package:neuralNetExperiments/src/tissue/Interconnection.dart';
-import 'package:neuralNetExperiments/src/tissue/TissueChangeListener.dart';
+import 'package:neural_net_experiments/src/cell/CellTypes.dart';
+import 'package:neural_net_experiments/src/reality/reality.dart';
+import 'package:neural_net_experiments/src/tissue/ConnectionTypes.dart';
+import 'package:neural_net_experiments/src/tissue/Interconnection.dart';
+import 'package:neural_net_experiments/src/tissue/TissueChangeListener.dart';
 
 class InvalidCellReferenceException implements Exception {
   int _cellIndex;
