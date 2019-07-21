@@ -10,3 +10,9 @@
 
 - Remove experimental code for now to keep this library more vanilla
 - Do a bit of formatting
+
+## 0.0.5
+
+- Add types that need to be used in imports of this library
+- Remove example code
+- Further pairing down of code that isn't immediately needed

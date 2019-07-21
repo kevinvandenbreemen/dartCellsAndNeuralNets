@@ -3,6 +3,10 @@
 /// More dartdocs go here.
 library neural_net_experiments;
 
-export 'src/neural_net_experiments_base.dart';
+export 'src/tissue/tissue.dart';
+export 'src/reality/reality.dart';
+export 'src/tissue/ConnectionTypes.dart';
+export 'src/tissue/Interconnection.dart';
+export 'src/cell/CellTypes.dart';
 
 // TODO: Export any libraries intended for clients of this package.
