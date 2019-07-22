@@ -9,14 +9,13 @@ import 'package:test/test.dart';
 
 void main() {
   group('Tissue', () {
-    
     Tissue tissue;
 
-    setUp((){
+    setUp(() {
       tissue = Tissue();
     });
 
-    test('Gets added to reality', (){
+    test('Gets added to reality', () {
       Reality reality = Reality.get();
       expect(reality.setOfAllTissues.contains(tissue), isTrue);
     });
@@ -27,7 +26,7 @@ void main() {
       expect(tissue.cellCount, equals(1));
     });
 
-    test('Deletes cell', (){
+    test('Deletes cell', () {
       tissue.add(STEM);
       tissue.add(STEM);
       tissue.deleteCell(1);
@@ -41,13 +40,13 @@ void main() {
       expect(tissue.type(of: 0), equals("Stem"));
     });
 
-    test('Can list types of cells in tissue', (){
+    test('Can list types of cells in tissue', () {
       tissue.add(STEM);
       tissue.add(2);
 
       List<int> cellTypes = tissue.cellTypes;
 
-      expect(cellTypes, equals([1,2]));
+      expect(cellTypes, equals([1, 2]));
     });
 
     test('Can connect one cell to another', () {
@@ -58,7 +57,7 @@ void main() {
       tissue.join(type: BIDIRECTIONAL, from: 0, to: 1, strength: 1.0);
       tissue.join(type: BIDIRECTIONAL, from: 0, to: 2, strength: 1.0);
 
-      expect(tissue.endpoints(0), equals([1,2]));
+      expect(tissue.endpoints(0), equals([1, 2]));
     });
 
     test('cannot connect cell to itself', () {
@@ -79,7 +78,6 @@ void main() {
 
       expect(tissue.endpoints(0), equals([2]));
       expect(tissue.endpoints(2), equals([0]));
-
     });
 
     test('Supports directed connections', () {
@@ -92,20 +90,18 @@ void main() {
       expect(tissue.endpoints(0), equals([2]));
       expect(tissue.endpoints(2), equals([]));
     });
-
   });
 
   group('Connecting with Other Tissues', () {
-
     Tissue t1;
     Tissue t2;
 
-    setUp((){
+    setUp(() {
       t1 = Tissue();
       t2 = Tissue();
     });
 
-    test('Connect one tissue with another', (){
+    test('Connect one tissue with another', () {
       t1.add(STEM);
       t2.add(STEM);
 
@@ -114,17 +110,18 @@ void main() {
       expect(t1.connectedTissues().length, equals(1));
     });
 
-    test('Any connection is added to reality', (){
+    test('Any connection is added to reality', () {
       t1.add(STEM);
       t2.add(STEM);
 
       t1.connectToTissue(t2, from: 0, to: 0);
 
       Interconnection connection = t1.connectedTissues()[0];
-      expect(Reality.get().setOfAllConnectionMatrices.contains(connection), isTrue);
+      expect(Reality.get().setOfAllConnectionMatrices.contains(connection),
+          isTrue);
     });
 
-    test('Connect cell in one tissue with cell in another', (){
+    test('Connect cell in one tissue with cell in another', () {
       t1.add(STEM);
       t2.add(STEM);
 
@@ -144,7 +141,7 @@ void main() {
       expect(t1.connectedTissues()[0].weight(0, 1), equals(0.0));
     });
 
-    test('Add cell to dest tissue updates connection', (){
+    test('Add cell to dest tissue updates connection', () {
       t1.add(STEM);
       t2.add(STEM);
 
@@ -155,7 +152,9 @@ void main() {
       expect(t1.connectedTissues()[0].weight(1, 0), equals(0.0));
     });
 
-    test('Deleting cell in destination tissue deletes corresponding outgoing connections', (){
+    test(
+        'Deleting cell in destination tissue deletes corresponding outgoing connections',
+        () {
       t1.add(STEM);
       t2.add(STEM);
 
@@ -164,10 +163,10 @@ void main() {
       t2.add(STEM);
       t2.deleteCell(1);
 
-      expect(()=>t1.connectedTissues()[0].weight(1, 0), throwsException);
+      expect(() => t1.connectedTissues()[0].weight(1, 0), throwsException);
     });
 
-    test('Add multiple connection weights', (){
+    test('Add multiple connection weights', () {
       t1.add(STEM);
       t2.add(STEM);
       t1.add(STEM);
@@ -189,8 +188,7 @@ void main() {
       expect(t1.connectedTissues().isEmpty, isTrue);
     });
 
-    test('Can count connections to other tissues for a given cell', (){
-
+    test('Can count connections to other tissues for a given cell', () {
       //  Arrange
       Tissue t3 = Tissue();
       t3.add(STEM);
@@ -213,13 +211,13 @@ void main() {
 
       expect(cVOut.isEmpty, isFalse);
       expect(cVOut.length, equals(2));
-      expect(cVOut.firstWhere((x)=>x.to == t3, orElse: ()=>null), isNotNull);
-      expect(cVOut.firstWhere((x)=>x.to == t2, orElse: ()=>null), isNotNull);
-
+      expect(
+          cVOut.firstWhere((x) => x.to == t3, orElse: () => null), isNotNull);
+      expect(
+          cVOut.firstWhere((x) => x.to == t2, orElse: () => null), isNotNull);
     });
 
-    test('Can count connections from other tissues for a given cell', (){
-
+    test('Can count connections from other tissues for a given cell', () {
       //  Arrange
       Tissue t3 = Tissue();
       t3.add(STEM);
@@ -242,12 +240,11 @@ void main() {
 
       expect(cVOut.isEmpty, isFalse);
       expect(cVOut.length, equals(1));
-      expect(cVOut.firstWhere((x)=>x.from == t2, orElse: ()=>null), isNotNull);
-
+      expect(
+          cVOut.firstWhere((x) => x.from == t2, orElse: () => null), isNotNull);
     });
 
-    test('Can calculate output to other tissue', (){
-
+    test('Can calculate output to other tissue', () {
       //  Arrange
       t1.add(STEM);
       t1.add(STEM);
@@ -267,10 +264,9 @@ void main() {
 
       //  Assert
       expect(output, equals([2.6, 4.2]));
-
     });
 
-    test('Deleting cells does not break output function', (){
+    test('Deleting cells does not break output function', () {
       //  Arrange
       t1.add(STEM);
       t1.add(STEM);
@@ -295,7 +291,8 @@ void main() {
       expect(output, equals([2.6, 4.2]));
     });
 
-    test('Deleting cell on destination tissue does not break output function', (){
+    test('Deleting cell on destination tissue does not break output function',
+        () {
       //  Arrange
       t1.add(STEM);
       t1.add(STEM);
@@ -320,7 +317,8 @@ void main() {
       expect(output, equals([2.6, 4.2]));
     });
 
-    test('Output to other tissue works after adding cell to destination tissue', (){
+    test('Output to other tissue works after adding cell to destination tissue',
+        () {
       //  Arrange
       t1.add(STEM);
       t1.add(STEM);
@@ -339,16 +337,17 @@ void main() {
       [0.5  0.4]
       [0.1  1.0]
       */
-      Matrix expectedWeightMatrix = Matrix(
-        [
-          [0.5, 0.4],
-          [0.1, 1.0],
-          [0.0, 0.0]
-        ]
-      );
+      Matrix expectedWeightMatrix = Matrix([
+        [0.5, 0.4],
+        [0.1, 1.0],
+        [0.0, 0.0]
+      ]);
 
       List<double> input = List<double>.from([2.0, 4.0]);
-      List<double> expectedOutputs = (expectedWeightMatrix * Vector.column(input)).columnVector(0).toList();
+      List<double> expectedOutputs =
+          (expectedWeightMatrix * Vector.column(input))
+              .columnVector(0)
+              .toList();
 
       Interconnection connection = t1.connectedTissues()[0];
 
@@ -358,6 +357,5 @@ void main() {
       //  Assert
       expect(output, equals(expectedOutputs));
     });
-
   });
 }

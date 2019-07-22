@@ -1,9 +1,7 @@
 import 'package:gviz/gviz.dart';
 import 'package:neural_net_experiments/src/tissue/tissue.dart';
 
-
 class Visualizer {
-
   String _nodeName(Tissue tissue, int index) {
     return "${tissue.type(of: index)} $index";
   }
@@ -12,9 +10,9 @@ class Visualizer {
     double rawWeight = tissue.weight(from, to).abs();
     if (rawWeight < 0.1) {
       return 1;
-    } else if(rawWeight <= 0.5) {
+    } else if (rawWeight <= 0.5) {
       return 2;
-    } else if(rawWeight <= 1) {
+    } else if (rawWeight <= 1) {
       return 3;
     } else {
       return 4;
@@ -25,9 +23,9 @@ class Visualizer {
     double rawWeight = tissue.weight(from, to).abs();
     if (rawWeight < 0.1) {
       return 0.1;
-    } else if(rawWeight <= 0.5) {
+    } else if (rawWeight <= 0.5) {
       return 0.5;
-    } else if(rawWeight <= 1) {
+    } else if (rawWeight <= 1) {
       return 1.0;
     } else {
       return 1.5;
@@ -36,7 +34,7 @@ class Visualizer {
 
   String _color(Tissue tissue, int from, int to) {
     double rawWeight = tissue.weight(from, to).abs();
-    if(rawWeight > 0) {
+    if (rawWeight > 0) {
       return "#00AA00";
     } else {
       return "#AA0000";
@@ -46,16 +44,15 @@ class Visualizer {
   String toDot(Tissue tissue) {
     final graph = Gviz();
 
-    for(var i=0; i<tissue.cellCount; i++) {
-      
+    for (var i = 0; i < tissue.cellCount; i++) {
       //  Node
-      String cellName = _nodeName(tissue, i); 
+      String cellName = _nodeName(tissue, i);
       graph.addNode(cellName, properties: {'shape': 'circle'});
 
       //  Edges from this node
       tissue.endpoints(i).forEach((index) {
         String endPoint = _nodeName(tissue, index);
-        graph.addEdge(cellName, endPoint, properties: {          
+        graph.addEdge(cellName, endPoint, properties: {
           'weight': "${_weight(tissue, i, index)}",
           'penwidth': "${_width(tissue, i, index)}",
           'color': _color(tissue, i, index)
@@ -65,5 +62,4 @@ class Visualizer {
 
     return graph.toString();
   }
-
 }
