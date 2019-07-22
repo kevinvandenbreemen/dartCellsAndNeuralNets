@@ -1,6 +1,6 @@
 name: neural_net_experiments
 description: Simple dart library to learn about creating neural net-like data structures with dart code
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/kevinvandenbreemen/dartCellsAndNeuralNets
 author: Kevin VanDenBreemen <kevin.vandenbreemen@gmail.com>
 

@@ -16,3 +16,7 @@
 - Add types that need to be used in imports of this library
 - Remove example code
 - Further pairing down of code that isn't immediately needed
+
+## 0.0.6
+
+- Run formatting on all code
