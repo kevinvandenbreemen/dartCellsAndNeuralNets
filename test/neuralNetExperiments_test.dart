@@ -180,6 +180,32 @@ void main() {
       expect(t1.connectedTissues().length, equals(0));
     });
 
+    test('Deleting all cells in destination tissue deletes corresponding chi in reality for origin cell', (){
+      t1.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 1.1);
+
+      t2.add(STEM);
+      t2.deleteCell(0);
+      t2.deleteCell(0);
+
+      expect(Reality.get().X(t1).tOut.isEmpty, isTrue);
+    });
+
+    test('Deleting all cells in destination tissue deletes corresponding chi in reality for destination cell', (){
+      t1.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 1.1);
+
+      t2.add(STEM);
+      t2.deleteCell(0);
+      t2.deleteCell(0);
+
+      expect(Reality.get().X(t2).tIn.isEmpty, isTrue);
+    });
+
     test('Add multiple connection weights', (){
       t1.add(STEM);
       t2.add(STEM);

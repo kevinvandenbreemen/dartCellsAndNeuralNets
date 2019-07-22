@@ -62,6 +62,7 @@ class Interconnection implements TissueChangeListener {
     _tissueConnections.removeAt(cellIndex);
     if(_tissueConnections.isEmpty) {
       from.removeConnectionTo(to);
+      Reality.get().unRegisterConnectionMatrix(this);
     }
   }
 

@@ -38,6 +38,9 @@ class Reality {
   void registerConnectionMatrix(Interconnection connectionMatrix) {
     _setOfAllConnectionMatrices.add(connectionMatrix);
   }
+  void unRegisterConnectionMatrix(Interconnection connection) {
+    _setOfAllConnectionMatrices.removeWhere((m)=>m == connection);
+  }
 
   Chi X(Tissue t) {
     return _Chi(
