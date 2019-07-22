@@ -1,10 +1,9 @@
 import 'package:neural_net_experiments/neural_net_experiments.dart';
 
 main() {
-
   Tissue t1 = Tissue();
   Tissue t2 = Tissue();
-      
+
   t1.add(STEM);
   t1.add(STEM);
   t2.add(STEM);

@@ -5,18 +5,17 @@ import 'package:neural_net_experiments/src/tissue/tissue.dart';
 import 'package:test/test.dart';
 
 main() {
-  group('Tissue Visualization', (){
-
+  group('Tissue Visualization', () {
     Tissue tissue;
 
     Visualizer visualizer;
 
-    setUp((){
+    setUp(() {
       tissue = Tissue();
-      visualizer = Visualizer(); 
+      visualizer = Visualizer();
     });
 
-    test('Visualizes Tissue', (){
+    test('Visualizes Tissue', () {
       tissue.add(STEM);
       tissue.add(STEM);
       tissue.add(STEM);
@@ -29,6 +28,5 @@ main() {
 
       print(visualizer.toDot(tissue));
     });
-
   });
 }
