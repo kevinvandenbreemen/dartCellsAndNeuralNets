@@ -100,6 +100,10 @@ class Tissue {
     }
   }
 
+  void removeConnectionTo(Tissue tissue) {
+    _connectedTissues = _connectedTissues.where((x)=>x.to != tissue).toList(growable: true);
+  }
+
   void connectToTissue(Tissue tissue, {int from, int to, double strength}) {
 
     if(tissue == this){

@@ -60,6 +60,9 @@ class Interconnection implements TissueChangeListener {
   @override
   void deleteCell(int cellIndex) {
     _tissueConnections.removeAt(cellIndex);
+    if(_tissueConnections.isEmpty) {
+      from.removeConnectionTo(to);
+    }
   }
 
   bool existConnectionsFrom(int fromIndex) {

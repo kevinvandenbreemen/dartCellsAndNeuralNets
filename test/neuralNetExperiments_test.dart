@@ -167,6 +167,19 @@ void main() {
       expect(()=>t1.connectedTissues()[0].weight(1, 0), throwsException);
     });
 
+    test('Deleting all cells in destination tissue deletes corresponding outgoing chi on origin', (){
+      t1.add(STEM);
+      t2.add(STEM);
+
+      t1.connectToTissue(t2, from: 0, to: 0, strength: 1.1);
+
+      t2.add(STEM);
+      t2.deleteCell(0);
+      t2.deleteCell(0);
+
+      expect(t1.connectedTissues().length, equals(0));
+    });
+
     test('Add multiple connection weights', (){
       t1.add(STEM);
       t2.add(STEM);
