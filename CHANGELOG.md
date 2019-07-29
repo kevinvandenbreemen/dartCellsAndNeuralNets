@@ -29,3 +29,7 @@
 
 - Add ability to determine connection strength between cells in tissue
 - Provide for searching specific connections
+
+## 0.0.81
+
+- Get rid of un-necessary method

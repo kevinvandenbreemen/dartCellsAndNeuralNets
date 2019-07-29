@@ -99,7 +99,7 @@ void main() {
 
         tissue.join(type: DIRECTED, from: 0, to: 2, strength: 1.0);
 
-        expect(tissue.connectionStrength(from: 0, to: 2), equals(1.0));
+        expect(tissue.weight(0, 2), equals(1.0));
       });
 
       test('Can update strength of a connection', () {
@@ -108,9 +108,9 @@ void main() {
         tissue.add(STEM);
 
         tissue.join(type: DIRECTED, from: 0, to: 2, strength: 1.0);
-        tissue.join(type: DIRECTED, from: 0, to: 2, strength: tissue.connectionStrength(from: 0, to: 2) + 0.5);
+        tissue.join(type: DIRECTED, from: 0, to: 2, strength: tissue.weight(0, 2) + 0.5);
 
-        expect(tissue.connectionStrength(from: 0, to: 2), equals(1.5));
+        expect(tissue.weight(0, 2), equals(1.5));
       });
 
       test('Can find strongest connection()', () {
