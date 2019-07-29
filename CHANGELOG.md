@@ -24,3 +24,8 @@
 ## 0.0.7
 
 - Fix bug in which deleting all cells in destination tissue was not properly reflected in connections
+
+## 0.0.8
+
+- Add ability to determine connection strength between cells in tissue
+- Provide for searching specific connections

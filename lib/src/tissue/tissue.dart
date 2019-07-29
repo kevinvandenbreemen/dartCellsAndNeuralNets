@@ -105,15 +105,22 @@ class Tissue {
     }
   }
 
-  int strongestConnectionFrom(int from) {
+  /// Visit all non-zero from the given the given cell 
+  void visitConnections(int from, Function(int) visitFunction) {
     List<int> dests = endpoints(from);
     if(dests.isEmpty) {
-      return null;
+      return;
     }
+
+    dests.forEach(visitFunction);
+  }
+
+  /// Gets the cell index of the endpoint of the strongest connection from the given cell
+  int strongestConnectionFrom(int from) {
 
     double maxStrength;
     int finalIndex;
-    dests.forEach((index){
+    Function(int) connectionIndexVisit = (index){
 
       double strength = connectionStrength(from: from, to: index); 
       if(maxStrength == null || maxStrength < strength) {
@@ -121,7 +128,9 @@ class Tissue {
         finalIndex = index;
       }
 
-    });
+    };
+
+    visitConnections(from, connectionIndexVisit);
 
     return finalIndex;
   }
