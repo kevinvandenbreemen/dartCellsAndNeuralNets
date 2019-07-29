@@ -105,6 +105,27 @@ class Tissue {
     }
   }
 
+  int strongestConnectionFrom(int from) {
+    List<int> dests = endpoints(from);
+    if(dests.isEmpty) {
+      return null;
+    }
+
+    double maxStrength;
+    int finalIndex;
+    dests.forEach((index){
+
+      double strength = connectionStrength(from: from, to: index); 
+      if(maxStrength == null || maxStrength < strength) {
+        maxStrength = strength;
+        finalIndex = index;
+      }
+
+    });
+
+    return finalIndex;
+  }
+
   void removeConnectionTo(Tissue tissue) {
     _connectedTissues = _connectedTissues.where((x)=>x.to != tissue).toList(growable: true);
   }

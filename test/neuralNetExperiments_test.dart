@@ -112,6 +112,26 @@ void main() {
 
         expect(tissue.connectionStrength(from: 0, to: 2), equals(1.5));
       });
+
+      test('Can find strongest connection()', () {
+        tissue.add(STEM);
+        tissue.add(STEM);
+        tissue.add(STEM);
+
+        tissue.join(type: DIRECTED, from: 0, to: 2, strength: 1.0);
+        tissue.join(type: DIRECTED, from: 0, to: 1, strength: 0.2);
+
+        expect(tissue.strongestConnectionFrom(0), equals(2));
+      });
+
+      test('Gracefully handles no out-going connections during strongest con search', () {
+        tissue.add(STEM);
+        tissue.add(STEM);
+        tissue.add(STEM);
+        tissue.add(STEM);
+
+        expect(tissue.strongestConnectionFrom(1), isNull);
+      });
     });
       
   });
