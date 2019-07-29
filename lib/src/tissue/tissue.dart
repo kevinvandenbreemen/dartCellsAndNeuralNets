@@ -91,6 +91,8 @@ class Tissue {
     return ret;
   }
 
+  /// Create or update the connection from cell at index [from] to cell at index [to] to the specified strength.  See also 
+  /// [connectionStrength()]
   void join({int type, int from, int to, double strength}) {
     if (from == to) {
       print("Connection from cell to itself not allowed");
@@ -105,6 +107,12 @@ class Tissue {
 
   void removeConnectionTo(Tissue tissue) {
     _connectedTissues = _connectedTissues.where((x)=>x.to != tissue).toList(growable: true);
+  }
+
+  /// Get the current connection strength from cell at index [from] to cell at index [to]
+  double connectionStrength({int from, int to}) {
+    assert(from != null && to != null);
+    return _connectionMatrix[from][to];
   }
 
   void connectToTissue(Tissue tissue, {int from, int to, double strength}) {

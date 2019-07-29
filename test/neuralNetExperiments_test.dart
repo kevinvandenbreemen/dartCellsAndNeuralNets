@@ -49,47 +49,71 @@ void main() {
       expect(cellTypes, equals([1, 2]));
     });
 
-    test('Can connect one cell to another', () {
-      tissue.add(STEM);
-      tissue.add(STEM);
-      tissue.add(STEM);
+    group('Connections between cells in a tissue', (){
+      test('Can connect one cell to another', () {
+        tissue.add(STEM);
+        tissue.add(STEM);
+        tissue.add(STEM);
 
-      tissue.join(type: BIDIRECTIONAL, from: 0, to: 1, strength: 1.0);
-      tissue.join(type: BIDIRECTIONAL, from: 0, to: 2, strength: 1.0);
+        tissue.join(type: BIDIRECTIONAL, from: 0, to: 1, strength: 1.0);
+        tissue.join(type: BIDIRECTIONAL, from: 0, to: 2, strength: 1.0);
 
-      expect(tissue.endpoints(0), equals([1, 2]));
+        expect(tissue.endpoints(0), equals([1, 2]));
+      });
+
+      test('cannot connect cell to itself', () {
+        tissue.add(STEM);
+        tissue.add(STEM);
+
+        tissue.join(type: BIDIRECTIONAL, from: 0, to: 0, strength: 1.0);
+
+        expect(tissue.endpoints(0), equals([]));
+      });
+
+      test('respects bidirectional connections', () {
+        tissue.add(STEM);
+        tissue.add(STEM);
+        tissue.add(STEM);
+
+        tissue.join(type: BIDIRECTIONAL, from: 0, to: 2, strength: 1.0);
+
+        expect(tissue.endpoints(0), equals([2]));
+        expect(tissue.endpoints(2), equals([0]));
+      });
+
+      test('Supports directed connections', () {
+        tissue.add(STEM);
+        tissue.add(STEM);
+        tissue.add(STEM);
+
+        tissue.join(type: DIRECTED, from: 0, to: 2, strength: 1.0);
+
+        expect(tissue.endpoints(0), equals([2]));
+        expect(tissue.endpoints(2), equals([]));
+      });
+
+      test('Can give strength of connection', (){
+        tissue.add(STEM);
+        tissue.add(STEM);
+        tissue.add(STEM);
+
+        tissue.join(type: DIRECTED, from: 0, to: 2, strength: 1.0);
+
+        expect(tissue.connectionStrength(from: 0, to: 2), equals(1.0));
+      });
+
+      test('Can update strength of a connection', () {
+        tissue.add(STEM);
+        tissue.add(STEM);
+        tissue.add(STEM);
+
+        tissue.join(type: DIRECTED, from: 0, to: 2, strength: 1.0);
+        tissue.join(type: DIRECTED, from: 0, to: 2, strength: tissue.connectionStrength(from: 0, to: 2) + 0.5);
+
+        expect(tissue.connectionStrength(from: 0, to: 2), equals(1.5));
+      });
     });
-
-    test('cannot connect cell to itself', () {
-      tissue.add(STEM);
-      tissue.add(STEM);
-
-      tissue.join(type: BIDIRECTIONAL, from: 0, to: 0, strength: 1.0);
-
-      expect(tissue.endpoints(0), equals([]));
-    });
-
-    test('respects bidirectional connections', () {
-      tissue.add(STEM);
-      tissue.add(STEM);
-      tissue.add(STEM);
-
-      tissue.join(type: BIDIRECTIONAL, from: 0, to: 2, strength: 1.0);
-
-      expect(tissue.endpoints(0), equals([2]));
-      expect(tissue.endpoints(2), equals([0]));
-    });
-
-    test('Supports directed connections', () {
-      tissue.add(STEM);
-      tissue.add(STEM);
-      tissue.add(STEM);
-
-      tissue.join(type: DIRECTED, from: 0, to: 2, strength: 1.0);
-
-      expect(tissue.endpoints(0), equals([2]));
-      expect(tissue.endpoints(2), equals([]));
-    });
+      
   });
 
   group('Connecting with Other Tissues', () {
