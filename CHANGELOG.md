@@ -37,3 +37,4 @@
 ## 0.0.9
 
 - Provide for giving names to graphs
+- Allow naming tissues
