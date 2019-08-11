@@ -31,10 +31,14 @@ class Tissue {
 
   List<List<double>> _connectionMatrix;
 
+  String _tissueName;
+  String get name => _tissueName;
+
   Tissue() {
     _cells = List();
     _connectedTissues = List();
     _changeListeners = List();
+    _tissueName = Reality.get().getNameForTissue();
     Reality.get().registerTissue(this);
   }
 

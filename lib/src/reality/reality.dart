@@ -26,6 +26,7 @@ class Reality {
   static final Reality _reality = Reality._Reality();
   static Reality get() => _reality;
 
+  int _tissueNameNumber;
   List<Tissue> _setOfAllTissues;
   List<Tissue> get setOfAllTissues => List.unmodifiable(_setOfAllTissues);
   void registerTissue(Tissue tissue) {
@@ -42,6 +43,10 @@ class Reality {
     _setOfAllConnectionMatrices.removeWhere((m)=>m == connection);
   }
 
+  String getNameForTissue() {
+    return "Tissue${++ _tissueNameNumber}";
+  }
+
   Chi X(Tissue t) {
     return _Chi(
         _setOfAllConnectionMatrices
@@ -53,5 +58,6 @@ class Reality {
   Reality._Reality() {
     _setOfAllTissues = List<Tissue>();
     _setOfAllConnectionMatrices = List<Interconnection>();
+    _tissueNameNumber = 0;
   }
 }

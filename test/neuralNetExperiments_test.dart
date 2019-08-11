@@ -15,6 +15,14 @@ void main() {
       tissue = Tissue();
     });
 
+    test('Can be given a name', () {
+      expect(tissue.name, equals('Tissue1'));
+    });
+
+    test('Subsequent tissues get their own names', () {
+      expect(Tissue().name, isNot(equals(tissue.name)));
+    });
+
     test('Gets added to reality', () {
       Reality reality = Reality.get();
       expect(reality.setOfAllTissues.contains(tissue), isTrue);
