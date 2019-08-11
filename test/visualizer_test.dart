@@ -28,5 +28,24 @@ main() {
 
       print(visualizer.toDot(tissue));
     });
+
+    test('Allows you to give a name for the network graph', () {
+
+      visualizer = Visualizer(name: 'tissue_graph');
+
+      tissue.add(STEM);
+      tissue.add(STEM);
+      tissue.add(STEM);
+      tissue.add(STEM);
+
+      tissue.join(from: 0, to: 1, strength: 0.2, type: DIRECTED);
+      tissue.join(from: 1, to: 2, strength: 12.2, type: DIRECTED);
+      tissue.join(from: 2, to: 3, strength: 0.7, type: DIRECTED);
+      tissue.join(from: 3, to: 0, strength: 1.0, type: DIRECTED);
+
+      print(visualizer.toDot(tissue));
+
+      expect(visualizer.toDot(tissue).startsWith("digraph tissue_graph"), isTrue);
+    });
   });
 }

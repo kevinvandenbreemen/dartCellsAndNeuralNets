@@ -2,6 +2,15 @@ import 'package:gviz/gviz.dart';
 import 'package:neural_net_experiments/src/tissue/tissue.dart';
 
 class Visualizer {
+
+  String _graphName = "the_graph";
+
+  Visualizer({String name}) {
+    if(name != null ){
+      this._graphName = name;
+    }
+  }
+
   String _nodeName(Tissue tissue, int index) {
     return "${tissue.type(of: index)} $index";
   }
@@ -42,7 +51,7 @@ class Visualizer {
   }
 
   String toDot(Tissue tissue) {
-    final graph = Gviz();
+    final graph = Gviz(name: _graphName);
 
     for (var i = 0; i < tissue.cellCount; i++) {
       //  Node

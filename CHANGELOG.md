@@ -33,3 +33,7 @@
 ## 0.0.81
 
 - Get rid of un-necessary method
+
+## 0.0.9
+
+- Provide for giving names to graphs
