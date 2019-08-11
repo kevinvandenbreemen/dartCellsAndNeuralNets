@@ -34,11 +34,11 @@ class Tissue {
   String _tissueName;
   String get name => _tissueName;
 
-  Tissue() {
+  Tissue({String name}) {
     _cells = List();
     _connectedTissues = List();
     _changeListeners = List();
-    _tissueName = Reality.get().getNameForTissue();
+    _tissueName = name == null ? Reality.get().getNameForTissue() : name;
     Reality.get().registerTissue(this);
   }
 

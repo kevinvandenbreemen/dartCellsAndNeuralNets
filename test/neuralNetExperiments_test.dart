@@ -19,6 +19,10 @@ void main() {
       expect(tissue.name, equals('Tissue1'));
     });
 
+    test('Name in constructor is used in tissue name', () {
+      expect(Tissue(name: "TestTissue").name, equals('TestTissue'));
+    });
+
     test('Subsequent tissues get their own names', () {
       expect(Tissue().name, isNot(equals(tissue.name)));
     });
