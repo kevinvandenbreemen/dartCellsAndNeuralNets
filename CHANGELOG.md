@@ -38,3 +38,4 @@
 
 - Provide for giving names to graphs
 - Allow naming tissues
+- Add graphing interconnection between two tissues
