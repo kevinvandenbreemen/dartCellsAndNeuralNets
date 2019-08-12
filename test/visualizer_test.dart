@@ -15,6 +15,28 @@ main() {
       visualizer = Visualizer();
     });
 
+    test('Visualizes connection from one tissue to another', () {
+      Tissue tissueA = Tissue();
+      Tissue tissueB = Tissue();
+
+      tissueA.add(STEM);
+      tissueA.add(STEM);
+      tissueB.add(STEM);
+      tissueB.add(STEM);
+
+      tissueA.connectToTissue(tissueB, from: 0, to: 0, strength: 0.5);
+      tissueA.connectToTissue(tissueB, from: 0, to: 1, strength: 0.9);
+
+      tissueA.join(from: 0, to: 1, strength: 0.2, type: DIRECTED);
+      tissueA.join(from: 1, to: 0, strength: 0.9, type: DIRECTED);
+      tissueB.join(from: 0, to: 1, strength: 5, type: DIRECTED);
+
+      String graphDot = visualizer.ofConnection(tissueA.connectedTissues()[0]);
+      expect(graphDot, isNotNull);
+
+      print(graphDot);
+    });
+
     test('Visualizes Tissue', () {
       tissue.add(STEM);
       tissue.add(STEM);
@@ -26,7 +48,7 @@ main() {
       tissue.join(from: 2, to: 3, strength: 0.7, type: DIRECTED);
       tissue.join(from: 3, to: 0, strength: 1.0, type: DIRECTED);
 
-      print(visualizer.toDot(tissue));
+      print(visualizer.ofTissue(tissue));
     });
 
     test('Allows you to give a name for the network graph', () {
@@ -43,9 +65,9 @@ main() {
       tissue.join(from: 2, to: 3, strength: 0.7, type: DIRECTED);
       tissue.join(from: 3, to: 0, strength: 1.0, type: DIRECTED);
 
-      print(visualizer.toDot(tissue));
+      print(visualizer.ofTissue(tissue));
 
-      expect(visualizer.toDot(tissue).startsWith("digraph tissue_graph"), isTrue);
+      expect(visualizer.ofTissue(tissue).startsWith("digraph tissue_graph"), isTrue);
     });
   });
 }
