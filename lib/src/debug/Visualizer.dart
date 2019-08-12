@@ -35,11 +35,12 @@ class Visualizer {
   }
 
   double convertWeightToWidth(double rawWeight) {
-    if (rawWeight < 0.1) {
+    double absWeight = rawWeight.abs();
+    if (absWeight < 0.1) {
       return 0.1;
-    } else if (rawWeight <= 0.5) {
+    } else if (absWeight <= 0.5) {
       return 0.5;
-    } else if (rawWeight <= 1) {
+    } else if (absWeight <= 1) {
       return 1.0;
     } else {
       return 1.5;
@@ -47,7 +48,7 @@ class Visualizer {
   }
 
   String _color(Tissue tissue, int from, int to) {
-    double rawWeight = tissue.weight(from, to).abs();
+    double rawWeight = tissue.weight(from, to);
     return convertWeightToColor(rawWeight);
   }
 

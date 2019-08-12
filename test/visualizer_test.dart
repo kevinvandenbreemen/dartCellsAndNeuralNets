@@ -26,9 +26,11 @@ main() {
 
       tissueA.connectToTissue(tissueB, from: 0, to: 0, strength: 0.5);
       tissueA.connectToTissue(tissueB, from: 0, to: 1, strength: 0.9);
+      tissueA.connectToTissue(tissueB, from: 1, to: 0, strength: -9);
+      tissueA.connectToTissue(tissueB, from: 1, to: 1, strength: 0.4);
 
       tissueA.join(from: 0, to: 1, strength: 0.2, type: DIRECTED);
-      tissueA.join(from: 1, to: 0, strength: 0.9, type: DIRECTED);
+      tissueA.join(from: 1, to: 0, strength: -0.9, type: DIRECTED);
       tissueB.join(from: 0, to: 1, strength: 5, type: DIRECTED);
 
       String graphDot = visualizer.ofConnection(tissueA.connectedTissues()[0]);
