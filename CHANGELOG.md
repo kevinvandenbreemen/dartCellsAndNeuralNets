@@ -34,7 +34,7 @@
 
 - Get rid of un-necessary method
 
-## 0.0.9
+## 0.0.90
 
 - Provide for giving names to graphs
 - Allow naming tissues
